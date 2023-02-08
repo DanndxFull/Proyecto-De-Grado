@@ -1,0 +1,54 @@
+{
+    "name": "PushObjecstAsset",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "b100940a-e970-4727-8155-93d11d671dca",
+            "actions": [
+                {
+                    "name": "PushLeft",
+                    "type": "Button",
+                    "id": "579d8e57-58dd-4408-a226-52b844fd31c0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PushRight",
+                    "type": "Button",
+                    "id": "c60fc12e-e2c2-43b0-9bd0-f4d3adc7d19d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b274dbe8-7cd6-40b7-b65c-668b7e2462ad",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PushLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "73068cf2-dff7-4db9-a1a7-5295e97da590",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PushRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

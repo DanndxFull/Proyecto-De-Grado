@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
+
+    [Header("Movement Variables")]
     //Input Fileds
     private PlayerInputAssets playerActionAsssets;
     private InputAction move;
@@ -17,7 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float gravityMultiplier;
     [SerializeField] float turnSmoothVelocity;
     [SerializeField] float turnSmoothTime = 0.1f;
-
+    public bool canMove;
 
     private Vector3 forceDirection = Vector3.zero;
 
@@ -25,8 +28,15 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Camera playerCamera;
 
+
+    [Header("Interact Variables")]
+
+    [SerializeField] GameObject toInteracto;
+    bool isInteracting;
+
     private void Awake()
     {
+        instance = this;
         Cursor.lockState = CursorLockMode.Confined;
         rb = GetComponent<Rigidbody>();
         playerActionAsssets = new PlayerInputAssets();
@@ -36,18 +46,29 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         playerActionAsssets.Player.Jump.started += DoJump;
+        playerActionAsssets.Player.Interact.started += DoInteract;
         move = playerActionAsssets.Player.Move;
         playerActionAsssets.Player.Enable();
     }
+
     private void OnDisable()
     {
         playerActionAsssets.Player.Jump.started -= DoJump;
+        playerActionAsssets.Player.Interact.started -= DoInteract;
         playerActionAsssets.Player.Disable();
     }
+    private void DoInteract(InputAction.CallbackContext obj)
+    {
+        if (isInteracting && canMove)
+        {
+            toInteracto.GetComponent<StartInteraction>().StartToInteractions();
+        }
+    }
+
 
     private void DoJump(InputAction.CallbackContext obj)
     {
-        if (IsGrounded())
+        if (IsGrounded() && canMove)
         {
             forceDirection += Vector3.up * jumpForce;
         }
@@ -64,21 +85,24 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        forceDirection += move.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * movementForce;
-        forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * movementForce;
+        if (canMove)
+        {
+            forceDirection += move.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * movementForce;
+            forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * movementForce;
 
-        rb.AddForce(forceDirection, ForceMode.Impulse);
-        forceDirection = Vector3.zero;
+            rb.AddForce(forceDirection, ForceMode.Impulse);
+            forceDirection = Vector3.zero;
 
-        if (rb.velocity.y < 0f)
-            rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime * gravityMultiplier;
+            if (rb.velocity.y < 0f)
+                rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime * gravityMultiplier;
 
-        Vector3 horizontalVelocity = rb.velocity;
-        horizontalVelocity.y = 0;
-        if (horizontalVelocity.sqrMagnitude > maxSpeed * maxSpeed)
-            rb.velocity = horizontalVelocity.normalized * maxSpeed + Vector3.up * rb.velocity.y;
+            Vector3 horizontalVelocity = rb.velocity;
+            horizontalVelocity.y = 0;
+            if (horizontalVelocity.sqrMagnitude > maxSpeed * maxSpeed)
+                rb.velocity = horizontalVelocity.normalized * maxSpeed + Vector3.up * rb.velocity.y;
 
-        LookAt();
+            LookAt();
+        }
     }
 
     private void LookAt()
@@ -108,5 +132,23 @@ public class PlayerController : MonoBehaviour
         Vector3 right = playerCamera.transform.right;
         right.y = 0;
         return right.normalized;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Interactable"))
+        {
+            isInteracting=true;
+            toInteracto = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Interactable"))
+        {
+            isInteracting=false;
+            toInteracto = null;
+        }
     }
 }
