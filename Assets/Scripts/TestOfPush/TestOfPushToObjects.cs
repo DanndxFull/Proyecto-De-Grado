@@ -9,23 +9,30 @@ public class TestOfPushToObjects : MonoBehaviour
     Rigidbody rb;
     PushObjecstAsset inputActions;
 
-    [SerializeField] float forceLeft, forceRight;
+    [SerializeField] float forceLeft, forceRight, timeToPush;
+    float currentTimeToPush1, currentTimeToPush2;
     [SerializeField] Rigidbody push1, push2;
     // Start is called before the first frame update
     void Awake()
     {
+        currentTimeToPush1 = 0;
+        currentTimeToPush2 = 0;
         rb = GetComponent<Rigidbody>();
         inputActions = new PushObjecstAsset();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        currentTimeToPush1 += Time.deltaTime;
+        currentTimeToPush2 += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Q) && currentTimeToPush1>=timeToPush)
         {
+            currentTimeToPush1 = 0;
             DoPushLeft();
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && currentTimeToPush2 >= timeToPush)
         {
+            currentTimeToPush2 = 0;
             DoPushRight();
         }
     }

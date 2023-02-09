@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Interactable"))
+        if (other.CompareTag("Interactable") && other.GetComponent<StartInteraction>().startedPuzle)
         {
             isInteracting=false;
             toInteracto = null;
