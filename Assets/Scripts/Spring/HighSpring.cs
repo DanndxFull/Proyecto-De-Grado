@@ -40,6 +40,7 @@ public class HighSpring : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             isPressed = false;
+            rb.velocity = Vector3.zero;
         }
     }
 }

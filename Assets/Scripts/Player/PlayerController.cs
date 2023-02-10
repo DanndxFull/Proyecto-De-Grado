@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     //Movement Fields
     private Rigidbody rb;
     [SerializeField] float movementForce;
+    [SerializeField] float dashForce;
     [SerializeField] float jumpForce;
     [SerializeField] float maxSpeed;
     [SerializeField] float gravityMultiplier;
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         playerActionAsssets.Player.Jump.started += DoJump;
         playerActionAsssets.Player.Interact.started += DoInteract;
+        playerActionAsssets.Player.Dash.started += DoDash;
         move = playerActionAsssets.Player.Move;
         playerActionAsssets.Player.Enable();
     }
@@ -55,8 +57,16 @@ public class PlayerController : MonoBehaviour
     {
         playerActionAsssets.Player.Jump.started -= DoJump;
         playerActionAsssets.Player.Interact.started -= DoInteract;
+        playerActionAsssets.Player.Dash.started -= DoDash;
         playerActionAsssets.Player.Disable();
     }
+
+    private void DoDash(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Dash");
+        rb.AddRelativeForce(Vector3.forward*dashForce,ForceMode.Impulse);
+    }
+
     private void DoInteract(InputAction.CallbackContext obj)
     {
         if (isInteracting && canMove)
