@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class TestOfPushToObjects : MonoBehaviour
 {
     Rigidbody rb;
-    PushObjecstAsset inputActions;
 
     [SerializeField] float forceLeft, forceRight, timeToPush;
     float currentTimeToPush1, currentTimeToPush2;
@@ -18,7 +17,6 @@ public class TestOfPushToObjects : MonoBehaviour
         currentTimeToPush1 = 0;
         currentTimeToPush2 = 0;
         rb = GetComponent<Rigidbody>();
-        inputActions = new PushObjecstAsset();
     }
 
     private void Update()

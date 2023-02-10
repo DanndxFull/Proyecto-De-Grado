@@ -8,8 +8,8 @@ public class StartInteraction : MonoBehaviour
     PlayerController player;
     Rigidbody rb;
 
-    [SerializeField] Rigidbody push1, push2;
-    [SerializeField] TestOfPushToObjects test;
+    [SerializeField] List<Rigidbody> bodys;
+    [SerializeField] MonoBehaviour test;
 
     public bool startedPuzle;
 
@@ -29,8 +29,10 @@ public class StartInteraction : MonoBehaviour
         player.transform.SetParent(this.transform);
         player.canMove = false;
         rb.isKinematic = false;
-        push1.isKinematic = false;
-        push2.isKinematic = false;
+        foreach (Rigidbody r in bodys)
+        {
+            r.isKinematic = false;
+        }
         test.enabled = true;
     }
 
@@ -42,8 +44,10 @@ public class StartInteraction : MonoBehaviour
         player.canMove = true;
         player.transform.SetParent(null);        
         rb.isKinematic = false;
-        push1.isKinematic = false;
-        push2.isKinematic = false;
+        foreach (Rigidbody r in bodys)
+        {
+            r.isKinematic = true;
+        }
         test.enabled = false;
     }
 }
