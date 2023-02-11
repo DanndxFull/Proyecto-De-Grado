@@ -13147,7 +13147,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-57576
+  m_Name: pb_Mesh27998
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -25407,12 +25407,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1624429259}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1682240528 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 512118460050113176, guid: 095db2e99312425498e88c955801a494,
-    type: 3}
-  m_PrefabInstance: {fileID: 512118459319332950}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1744570980
 GameObject:
   m_ObjectHideFlags: 0
@@ -25527,6 +25521,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744570980}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1832029910 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1832029910, guid: 095db2e99312425498e88c955801a494,
+    type: 3}
+  m_PrefabInstance: {fileID: 512118459319332950}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1868816393
 Mesh:
   m_ObjectHideFlags: 0
@@ -25803,7 +25803,7 @@ GameObject:
   - component: {fileID: 1959248666}
   m_Layer: 0
   m_Name: Prism
-  m_TagString: Untagged
+  m_TagString: Grabable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25819,7 +25819,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1231645967}
 --- !u!33 &1959248667
@@ -26222,14 +26222,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 512118460092897936, guid: 095db2e99312425498e88c955801a494,
+    - target: {fileID: 512118460050113176, guid: 095db2e99312425498e88c955801a494,
         type: 3}
-      propertyPath: m_Name
-      value: Player
+      propertyPath: m_LocalPosition.y
+      value: -0.34
       objectReference: {fileID: 0}
     - target: {fileID: 512118460092897936, guid: 095db2e99312425498e88c955801a494,
         type: 3}
-      propertyPath: m_TagString
+      propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 512118460092897937, guid: 095db2e99312425498e88c955801a494,
@@ -26287,56 +26287,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 512118460092897946, guid: 095db2e99312425498e88c955801a494,
-        type: 3}
-      propertyPath: m_Mass
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 512118460092897949, guid: 095db2e99312425498e88c955801a494,
         type: 3}
-      propertyPath: eyes
+      propertyPath: handsToGrab
       value: 
-      objectReference: {fileID: 1682240528}
-    - target: {fileID: 512118460092897949, guid: 095db2e99312425498e88c955801a494,
-        type: 3}
-      propertyPath: canMove
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 512118460092897949, guid: 095db2e99312425498e88c955801a494,
-        type: 3}
-      propertyPath: dashForce
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 512118460092897949, guid: 095db2e99312425498e88c955801a494,
-        type: 3}
-      propertyPath: jumpForce
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 512118460092897949, guid: 095db2e99312425498e88c955801a494,
-        type: 3}
-      propertyPath: offsetRay.x
-      value: -0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 512118460092897949, guid: 095db2e99312425498e88c955801a494,
-        type: 3}
-      propertyPath: offsetRay.y
-      value: 0.5
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1832029910}
     - target: {fileID: 512118460092897949, guid: 095db2e99312425498e88c955801a494,
         type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 330585545}
-    - target: {fileID: 512118460092897949, guid: 095db2e99312425498e88c955801a494,
-        type: 3}
-      propertyPath: movementForce
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 512118460092897949, guid: 095db2e99312425498e88c955801a494,
-        type: 3}
-      propertyPath: gravityMultiplier
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 095db2e99312425498e88c955801a494, type: 3}
 --- !u!1001 &7390073538275963420
@@ -26548,12 +26508,12 @@ PrefabInstance:
     - target: {fileID: 8631022302853400731, guid: 480f6f2d5b8d75f40833584fa4c939f8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.22268853
+      value: -0.22268851
       objectReference: {fileID: 0}
     - target: {fileID: 8631022302853400731, guid: 480f6f2d5b8d75f40833584fa4c939f8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.022050506
+      value: 0.022050502
       objectReference: {fileID: 0}
     - target: {fileID: 8631022303173838499, guid: 480f6f2d5b8d75f40833584fa4c939f8,
         type: 3}

@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     Ray ray;
     [SerializeField] Vector2 offsetRay;
     [SerializeField] Transform eyes;
-
+    [SerializeField] Transform handsToGrab;
     private void Awake()
     {
         instance = this;
@@ -79,6 +79,10 @@ public class PlayerController : MonoBehaviour
             if (hit.collider.CompareTag("Interactable"))
             {
                 toInteracto.GetComponent<StartInteraction>().StartToInteractions();
+            }else if (hit.collider.CompareTag("Grabable"))
+            {
+                hit.collider.transform.position = handsToGrab.position;
+                hit.collider.transform.parent = this.transform;                
             }
         }
     }
