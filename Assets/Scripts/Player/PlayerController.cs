@@ -35,6 +35,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject toInteracto;
     bool isInteracting;
 
+    [Header("Ray to catch")]
+    Ray ray;
+    [SerializeField] Vector2 offsetRay;
+    [SerializeField] Transform eyes;
+
     private void Awake()
     {
         instance = this;
@@ -69,9 +74,12 @@ public class PlayerController : MonoBehaviour
 
     private void DoInteract(InputAction.CallbackContext obj)
     {
-        if (isInteracting && canMove)
+        if (Physics.Raycast(ray,out RaycastHit hit,1f) && canMove)
         {
-            toInteracto.GetComponent<StartInteraction>().StartToInteractions();
+            if (hit.collider.CompareTag("Interactable"))
+            {
+                toInteracto.GetComponent<StartInteraction>().StartToInteractions();
+            }
         }
     }
 
@@ -113,6 +121,14 @@ public class PlayerController : MonoBehaviour
 
             LookAt();
         }
+
+        ray = new Ray(new Vector3(eyes.position.x, eyes.position.y, eyes.position.z), transform.forward);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Color color = Color.red;
+        Gizmos.DrawRay(ray);
     }
 
     private void LookAt()

@@ -28,19 +28,13 @@ public class HighSpring : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Player"))
-        {
             isPressed = true;
-        }
     }
 
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.collider.CompareTag("Player"))
-        {
             isPressed = false;
             rb.velocity = Vector3.zero;
-        }
     }
 }
