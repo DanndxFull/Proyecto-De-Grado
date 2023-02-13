@@ -25801,6 +25801,7 @@ GameObject:
   - component: {fileID: 1959248668}
   - component: {fileID: 1959248667}
   - component: {fileID: 1959248666}
+  - component: {fileID: 1959248671}
   m_Layer: 0
   m_Name: Prism
   m_TagString: Grabable
@@ -26067,6 +26068,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1959248671
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959248665}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!54 &1971175471 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 316901703521654858, guid: 4f50d9c22775d43439a25a9a3c6ae2df,
@@ -26503,12 +26520,12 @@ PrefabInstance:
     - target: {fileID: 8631022302853400731, guid: 480f6f2d5b8d75f40833584fa4c939f8,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.09603872
+      value: 0.09603871
       objectReference: {fileID: 0}
     - target: {fileID: 8631022302853400731, guid: 480f6f2d5b8d75f40833584fa4c939f8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.22268851
+      value: -0.2226885
       objectReference: {fileID: 0}
     - target: {fileID: 8631022302853400731, guid: 480f6f2d5b8d75f40833584fa4c939f8,
         type: 3}

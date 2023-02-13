@@ -35,11 +35,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject toInteracto;
     bool isInteracting;
 
-    [Header("Ray to catch")]
+    [Header("Variables to catch")]
     Ray ray;
     [SerializeField] Vector2 offsetRay;
     [SerializeField] Transform eyes;
     [SerializeField] Transform handsToGrab;
+    [SerializeField] Transform objectGrabed;
+    bool isHolding;
     private void Awake()
     {
         instance = this;
@@ -74,16 +76,26 @@ public class PlayerController : MonoBehaviour
 
     private void DoInteract(InputAction.CallbackContext obj)
     {
-        if (Physics.Raycast(ray,out RaycastHit hit,1f) && canMove)
+        if (Physics.Raycast(ray,out RaycastHit hit,1f) && canMove && !isHolding)
         {
             if (hit.collider.CompareTag("Interactable"))
             {
                 toInteracto.GetComponent<StartInteraction>().StartToInteractions();
             }else if (hit.collider.CompareTag("Grabable"))
             {
-                hit.collider.transform.position = handsToGrab.position;
-                hit.collider.transform.parent = this.transform;                
+                isHolding = true;
+                objectGrabed = hit.collider.transform;
+                objectGrabed.transform.position = handsToGrab.position;
+                objectGrabed.transform.parent = this.transform;
+                objectGrabed.GetComponent<Rigidbody>().isKinematic = true;
             }
+        }
+        else if (isHolding)
+        {
+            isHolding = false;
+            objectGrabed.transform.position = handsToGrab.position + Vector3.forward;
+            objectGrabed.GetComponent<Rigidbody>().isKinematic = false;
+            objectGrabed.transform.parent = null;
         }
     }
 
