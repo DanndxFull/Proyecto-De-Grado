@@ -11,6 +11,7 @@ public class TestOfPushToObjects : MonoBehaviour
     [SerializeField] float forceLeft, forceRight, timeToPush;
     float currentTimeToPush1, currentTimeToPush2;
     [SerializeField] Rigidbody push1, push2;
+    public bool puzzleFinished;
     // Start is called before the first frame update
     void Awake()
     {
@@ -19,30 +20,31 @@ public class TestOfPushToObjects : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    public void StartTest()
     {
-        currentTimeToPush1 += Time.deltaTime;
-        currentTimeToPush2 += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Q) && currentTimeToPush1>=timeToPush)
+        StartCoroutine(StartMoving());
+    }
+
+    IEnumerator StartMoving()
+    {
+        while (!puzzleFinished)
         {
-            currentTimeToPush1 = 0;
+            currentTimeToPush1 += Time.deltaTime;
+            currentTimeToPush2 += Time.deltaTime;
             DoPushLeft();
-        }
-        if (Input.GetKeyDown(KeyCode.E) && currentTimeToPush2 >= timeToPush)
-        {
-            currentTimeToPush2 = 0;
-            DoPushRight();
+            DoPushRight();        
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
     private void DoPushLeft()
     {
-        Debug.Log("Push1");
         push1.AddForce(Vector3.forward*(forceLeft/push1.mass), ForceMode.Impulse);
+        currentTimeToPush1 = 0;
     }
     private void DoPushRight()
     {        
-        Debug.Log("Push2");
         push2.AddForce(Vector3.forward * (forceRight / push2.mass), ForceMode.Impulse);
+        currentTimeToPush2 = 0;
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class StartInteraction : MonoBehaviour
 {
     [SerializeField] GameObject camera,camera2;
+    [SerializeField] List<GameObject> objectsToggle;
     PlayerController player;
     Rigidbody rb;
 
@@ -29,10 +30,8 @@ public class StartInteraction : MonoBehaviour
         player.transform.SetParent(this.transform);
         player.canMove = false;
         rb.isKinematic = false;
-        foreach (Rigidbody r in bodys)
-        {
-            r.isKinematic = false;
-        }
+        RigidBodyesKinematics(false);
+        ObjectsActivate(true);
         test.enabled = true;
     }
 
@@ -44,10 +43,24 @@ public class StartInteraction : MonoBehaviour
         player.canMove = true;
         player.transform.SetParent(null);        
         rb.isKinematic = false;
+        RigidBodyesKinematics(true);
+        ObjectsActivate(false);
+        test.enabled = false;
+    }
+
+    private void RigidBodyesKinematics(bool state)
+    {
         foreach (Rigidbody r in bodys)
         {
-            r.isKinematic = true;
+            r.isKinematic = state;
         }
-        test.enabled = false;
+    }
+
+    private void ObjectsActivate(bool state)
+    {
+        foreach(GameObject GO in objectsToggle)
+        {
+            GO.SetActive(state);
+        }
     }
 }

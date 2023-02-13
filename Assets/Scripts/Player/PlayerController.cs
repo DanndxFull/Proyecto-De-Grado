@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform handsToGrab;
     [SerializeField] Transform objectGrabed;
     bool isHolding;
+    [SerializeField] LayerMask LayerOfTest;
     private void Awake()
     {
         instance = this;
@@ -76,11 +77,11 @@ public class PlayerController : MonoBehaviour
 
     private void DoInteract(InputAction.CallbackContext obj)
     {
-        if (Physics.Raycast(ray,out RaycastHit hit,1f) && canMove && !isHolding)
+        if (Physics.Raycast(ray,out RaycastHit hit,1f,LayerOfTest) && canMove && !isHolding)
         {
             if (hit.collider.CompareTag("Interactable"))
             {
-                toInteracto.GetComponent<StartInteraction>().StartToInteractions();
+                hit.collider.GetComponent<StartInteraction>()?.StartToInteractions();
             }else if (hit.collider.CompareTag("Grabable"))
             {
                 isHolding = true;
