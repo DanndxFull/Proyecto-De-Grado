@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
     private bool IsGrounded()
     {
         Ray ray = new Ray(this.transform.position + -Vector3.up, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 1.2f, Ground))
+        if (Physics.Raycast(ray, out RaycastHit hit, 2f, Ground))
             return true;
         else
             return false;
