@@ -12,6 +12,7 @@ public class VerificationZone : MonoBehaviour
     [SerializeField] TestOfPushToObjects test;
 
     public int studentAnswer, correctAnswer;
+    public int studentAnswer2, correctAnswer2;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,7 +23,7 @@ public class VerificationZone : MonoBehaviour
             {
                 test.puzzleFinished = true;
                 interactionController.FinishInteract();
-                if (correctAnswer == studentAnswer)
+                if (correctAnswer == studentAnswer && correctAnswer2 == studentAnswer2)
                 {
                     winEvent.Invoke();
                 }
@@ -37,5 +38,9 @@ public class VerificationZone : MonoBehaviour
     public void SetStudentAnswer(int answer)
     {
         studentAnswer = answer;
+    }
+    public void SetStudentAnswer2(int answer)
+    {
+        studentAnswer2 = answer;
     }
 }

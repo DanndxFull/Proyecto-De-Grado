@@ -111,11 +111,20 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        Ray ray = new Ray(this.transform.position + -Vector3.up, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 2f, Ground))
+        Ray ray = new Ray(this.transform.position, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 4f, Ground))
+        {
             return true;
+        }
         else
+        {
             return false;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(this.transform.position, Vector3.down);
     }
 
     private void FixedUpdate()
@@ -128,8 +137,6 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(forceDirection, ForceMode.Impulse);
             forceDirection = Vector3.zero;
 
-            if (rb.velocity.y < 0f)
-                rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime * gravityMultiplier;
 
             Vector3 horizontalVelocity = rb.velocity;
             horizontalVelocity.y = 0;
@@ -139,13 +146,9 @@ public class PlayerController : MonoBehaviour
             LookAt();
         }
 
+        if (rb.velocity.y < 0f)
+            rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime * gravityMultiplier;
         ray = new Ray(new Vector3(eyes.position.x, eyes.position.y, eyes.position.z), transform.forward);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Color color = Color.red;
-        Gizmos.DrawRay(ray);
     }
 
     private void LookAt()
