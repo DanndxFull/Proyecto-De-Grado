@@ -105,11 +105,11 @@ public class PlayerController : MonoBehaviour
     {
         if (IsGrounded() && canMove)
         {
-            forceDirection += Vector3.up * jumpForce;
+            rb.AddForce(Vector3.up*jumpForce,ForceMode.Impulse);
         }
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         Ray ray = new Ray(this.transform.position, Vector3.down);
         if (Physics.Raycast(ray, out RaycastHit hit, 4f, Ground))

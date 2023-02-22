@@ -9,6 +9,7 @@ public class AnimationsController : MonoBehaviour
     float speed, timeBeenStay;
     [SerializeField] float timeToDance;
     bool isIDLEING;
+    [SerializeField] PlayerController player;
 
     private void Start()
     {
@@ -20,7 +21,8 @@ public class AnimationsController : MonoBehaviour
     private void LateUpdate()
     {
         timeBeenStay += Time.deltaTime;
-        if (rb.velocity.magnitude > 0.1f && rb.velocity.y==0)
+        anim.SetFloat("VelocidadY", rb.velocity.y);
+        if (rb.velocity.magnitude > 0.1f && player.IsGrounded())
         {
             timeBeenStay = 0;
             anim.SetBool("IDLEOTHERS", false);
