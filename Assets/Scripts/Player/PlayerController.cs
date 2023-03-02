@@ -77,18 +77,22 @@ public class PlayerController : MonoBehaviour
 
     private void DoInteract(InputAction.CallbackContext obj)
     {
-        if (Physics.Raycast(ray,out RaycastHit hit,1f,LayerOfTest) && canMove && !isHolding)
+        Collider[] hitColliders = Physics.OverlapBox(eyes.position + Vector3.forward, eyes.localScale + Vector3.one, Quaternion.identity, LayerOfTest);
+        if (hitColliders.Length!=0 && canMove && !isHolding)
         {
-            if (hit.collider.CompareTag("Interactable"))
+            if (hitColliders[0].CompareTag("Interactable"))
             {
-                hit.collider.GetComponent<StartInteraction>()?.StartToInteractions();
-            }else if (hit.collider.CompareTag("Grabable"))
+                hitColliders[0].GetComponent<StartInteraction>()?.StartToInteractions();
+            }else if (hitColliders[0].CompareTag("Grabable"))
             {
                 isHolding = true;
-                objectGrabed = hit.collider.transform;
+                objectGrabed = hitColliders[0].transform;
                 objectGrabed.transform.position = handsToGrab.position;
                 objectGrabed.transform.parent = this.transform;
                 objectGrabed.GetComponent<Rigidbody>().isKinematic = true;
+            }else if (hitColliders[0].CompareTag("Newton"))
+            {
+
             }
         }
         else if (isHolding)
@@ -100,6 +104,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(eyes.position + Vector3.forward,eyes.localScale * 3);
+    }
 
     private void DoJump(InputAction.CallbackContext obj)
     {
@@ -120,11 +129,6 @@ public class PlayerController : MonoBehaviour
         {
             return false;
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawRay(this.transform.position, Vector3.down);
     }
 
     private void FixedUpdate()

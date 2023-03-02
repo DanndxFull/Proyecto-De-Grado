@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
 
 public class Vehicle : MonoBehaviour
 {
     [SerializeField] float exactWeight, currentlyWeight;
 
     [SerializeField] UnityEvent WinEvent;
+    [SerializeField] Vector3 endPosition;
+    [SerializeField] float timeToMove;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Grabable"))
         {
+            other.transform.parent = transform;
             currentlyWeight++;
             CheckWeigth();
         }
@@ -21,6 +25,7 @@ public class Vehicle : MonoBehaviour
     {
         if (other.CompareTag("Grabable"))
         {
+            other.transform.parent = null;
             currentlyWeight--;
         }        
     }
@@ -30,7 +35,8 @@ public class Vehicle : MonoBehaviour
     {
         if (currentlyWeight >= exactWeight)
         {
-            WinEvent.Invoke();
+            transform.DOMove(endPosition, timeToMove).OnComplete(()=>WinEvent.Invoke());
+
             Debug.Log("Me muevo");
         }
     }

@@ -21,6 +21,9 @@ public class StartInteraction : MonoBehaviour
     }
     public void StartToInteractions()
     {
+        if (startedPuzle)
+            return;
+
         startedPuzle = true;
         camera.SetActive(true);
         camera2.SetActive(false);
@@ -42,7 +45,7 @@ public class StartInteraction : MonoBehaviour
         player.GetComponent<Rigidbody>().isKinematic = false;
         player.canMove = true;
         player.transform.SetParent(null);        
-        rb.isKinematic = false;
+        rb.isKinematic = true;
         RigidBodyesKinematics(true);
         ObjectsActivate(false);
         test.enabled = false;
