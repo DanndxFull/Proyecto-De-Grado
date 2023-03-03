@@ -19,13 +19,21 @@ public class VerificationZone : MonoBehaviour
         if (other.CompareTag("Car"))
         {
             amount++;
-            if (amount >= 2)
+            if (amount == 2)
             {
                 test.puzzleFinished = true;
                 interactionController.FinishInteract();
-                if (correctAnswer == studentAnswer && correctAnswer2 == studentAnswer2)
+                if (correctAnswer == studentAnswer || correctAnswer2 == studentAnswer2)
                 {
                     winEvent.Invoke();
+                    if(correctAnswer == studentAnswer)
+                    {
+                        ScoreManager.instanceScore.UpdateScore(1);
+                    }
+                    if (correctAnswer2 == studentAnswer2)
+                    {
+                        ScoreManager.instanceScore.UpdateScore(3);
+                    }
                 }
                 else
                 {

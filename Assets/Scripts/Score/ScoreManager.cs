@@ -6,7 +6,21 @@ using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreText;
+    public static ScoreManager instanceScore;
     public int score = 0;
+
+    private void Awake()
+    {
+        if (instanceScore != null)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instanceScore = this;
+            DontDestroyOnLoad(this);
+        }
+    }
 
     public void UpdateScore(int score)
     {
