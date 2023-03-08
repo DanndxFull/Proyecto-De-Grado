@@ -8,6 +8,7 @@ TagManager:
   - Car
   - Grabable
   - Newton
+  - PushableObject
   layers:
   - Default
   - TransparentFX

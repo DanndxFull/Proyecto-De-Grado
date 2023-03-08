@@ -43,6 +43,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform objectGrabed;
     bool isHolding;
     [SerializeField] LayerMask LayerOfTest;
+
+    [Header("Others")]
+    public bool strong;
+    public float forceToPush;
+
     private void Awake()
     {
         instance = this;
@@ -92,7 +97,8 @@ public class PlayerController : MonoBehaviour
                 objectGrabed.GetComponent<Rigidbody>().isKinematic = true;
             }else if (hitColliders[0].CompareTag("Newton"))
             {
-
+                Debug.Log("Newton");
+                hitColliders[0].GetComponent<TestOfCalculate>().StartDialogue();
             }
         }
         else if (isHolding)
@@ -121,7 +127,7 @@ public class PlayerController : MonoBehaviour
     public bool IsGrounded()
     {
         Ray ray = new Ray(this.transform.position, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 4f, Ground))
+        if (Physics.Raycast(ray, out RaycastHit hit, 8f, Ground))
         {
             return true;
         }
@@ -200,5 +206,11 @@ public class PlayerController : MonoBehaviour
             isInteracting=false;
             toInteracto = null;
         }
+    }
+
+    public void UpdateForce(float force)
+    {
+        forceToPush += force;
+        ForceManager.instanceForce.UpdateForceUI(forceToPush);
     }
 }

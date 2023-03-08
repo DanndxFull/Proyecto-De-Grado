@@ -7,17 +7,18 @@ public class StartInteraction : MonoBehaviour
     [SerializeField] GameObject camera,camera2;
     [SerializeField] List<GameObject> objectsToggle;
     PlayerController player;
-    Rigidbody rb;
 
     [SerializeField] List<Rigidbody> bodys;
     [SerializeField] MonoBehaviour test;
 
     public bool startedPuzle;
+    public bool ToggleRigidBodys = true, ToggleObjects = true;
+
+    public Transform position, parent;
 
     private void Start()
     {
         player = PlayerController.instance;
-        rb = GetComponent<Rigidbody>();
     }
     public void StartToInteractions()
     {
@@ -27,15 +28,31 @@ public class StartInteraction : MonoBehaviour
         startedPuzle = true;
         camera.SetActive(true);
         camera2.SetActive(false);
-        player.GetComponent<Rigidbody>().isKinematic = true;
-        player.transform.rotation = this.transform.rotation;
-        player.transform.position = Vector3.back * 1.5f + Vector3.up;
-        player.transform.SetParent(this.transform);
+        //player.GetComponent<Rigidbody>().isKinematic = true;
+        player.transform.parent = parent.transform; 
+        player.transform.position = position.position;
+        player.transform.rotation = position.rotation;
         player.canMove = false;
-        rb.isKinematic = false;
-        RigidBodyesKinematics(false);
-        ObjectsActivate(true);
+        if(ToggleRigidBodys)
+            RigidBodyesKinematics(false);
+        if(ToggleObjects)
+            ObjectsActivate(true);
         test.enabled = true;
+    }
+
+    public void StopInteraction()
+    {
+        startedPuzle = false;
+        camera.SetActive(false);
+        camera2.SetActive(true);
+        player.GetComponent<Rigidbody>().isKinematic = false;
+        player.canMove = true;
+        player.transform.SetParent(null);
+        if (ToggleRigidBodys)
+            RigidBodyesKinematics(true);
+        if (ToggleObjects)
+            ObjectsActivate(false);
+        test.enabled = false;
     }
 
     public void FinishInteract()
@@ -44,11 +61,12 @@ public class StartInteraction : MonoBehaviour
         camera2.SetActive(true);
         player.GetComponent<Rigidbody>().isKinematic = false;
         player.canMove = true;
-        player.transform.SetParent(null);        
-        rb.isKinematic = true;
-        RigidBodyesKinematics(true);
-        ObjectsActivate(false);
-        test.enabled = false;
+        player.transform.SetParent(null);
+        if(ToggleRigidBodys)
+            RigidBodyesKinematics(true);
+        if(ToggleObjects)
+            ObjectsActivate(false);
+        test.enabled = false;        
     }
 
     private void RigidBodyesKinematics(bool state)

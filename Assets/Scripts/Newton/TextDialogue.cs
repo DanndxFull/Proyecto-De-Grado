@@ -15,6 +15,8 @@ public class TextDialogue : MonoBehaviour
     string answer;
 
     [SerializeField] VerificationZone verificationZone;
+
+    public bool optionsText;
     private void Start()
     {
         index = 0;
@@ -46,11 +48,14 @@ public class TextDialogue : MonoBehaviour
     {
         answer = fieldOfAnswer.text;
         verificationZone.SetStudentAnswer2(Int32.Parse(answer));
-        textBox.text = "y ahora dime, cual carro crees que llegue primero?";
         enterAnswerButton.SetActive(false);
         fieldAnswer.SetActive(false);
-        optionA.SetActive(true);
-        optionB.SetActive(true);
+        if (optionsText)
+        {
+            textBox.text = "y ahora dime, cual carro crees que llegue primero?";
+            optionA.SetActive(true);
+            optionB.SetActive(true);
+        }
     }
 
 }

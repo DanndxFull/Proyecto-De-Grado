@@ -8,7 +8,7 @@ public class AnimationsController : MonoBehaviour
     Animator anim;
     float speed, timeBeenStay;
     [SerializeField] float timeToDance;
-    bool isIDLEING;
+    bool isIDLEING, isPushing;
     [SerializeField] PlayerController player;
 
     private void Start()
@@ -20,29 +20,48 @@ public class AnimationsController : MonoBehaviour
 
     private void LateUpdate()
     {
-        timeBeenStay += Time.deltaTime;
-        anim.SetFloat("VelocidadY", rb.velocity.y);
-        if (rb.velocity.magnitude > 0.1f && player.IsGrounded())
+        if (player.canMove)
         {
-            timeBeenStay = 0;
-            anim.SetBool("IDLEOTHERS", false);
-            speed = 1;
-            isIDLEING = false;
-        }
-        else
-        {
-            speed = 0;
-        }
-        if (timeBeenStay > timeToDance)
-        {
-            if (!isIDLEING)
+            timeBeenStay += Time.deltaTime;
+            anim.SetFloat("VelocidadY", rb.velocity.y);
+            if (rb.velocity.magnitude > 0.1f && player.IsGrounded())
             {
-                isIDLEING = true;
-                int animation = Random.Range(1,3);
-                anim.SetFloat("IDLEANIMATION", animation);
-                anim.SetBool("IDLEOTHERS", true);
+                timeBeenStay = 0;
+                anim.SetBool("IDLEOTHERS", false);
+                speed = 1;
+                isIDLEING = false;
             }
+            else
+            {
+                speed = 0;
+            }
+            if (timeBeenStay > timeToDance)
+            {
+                if (!isIDLEING)
+                {
+                    isIDLEING = true;
+                    int animation = Random.Range(1, 3);
+                    anim.SetFloat("IDLEANIMATION", animation);
+                    anim.SetBool("IDLEOTHERS", true);
+                }
+            }
+            anim.SetFloat("Moving", speed);
+        }     
+        else if (isPushing)
+        {
+            float input = Input.GetAxis("Vertical");
+            if (input < 0)
+                input = 0;
+
+            if (input >= 1)
+                input = 1;
+            anim.SetFloat("Push", input);
         }
-        anim.SetFloat("Moving",speed);
+    }
+
+    public void PushingToggle(bool state)
+    {
+        isPushing = state;
+        anim.SetBool("Pushing", state);
     }
 }
