@@ -16,16 +16,22 @@ public class TestOfCalculate : MonoBehaviour
     float currentAnswer;
 
     [SerializeField] UnityEvent winEvent,loseEvent;
-    int index=0;
+    [SerializeField] int index;
     [SerializeField] int indexOfAnswer;
-
+    public bool active;
 
     public void StartDialogue()
     {
+        if (active)
+            return;
+
+        index = 0;
         Debug.Log("Started");
         textBox.text = texts[index];
         player.canMove = false;
         dialogueControlls.SetActive(true);
+        active = true;
+        NewtonManager.newtonManager.SetCurrent(this);
     }
 
     public void NextDialogue()
@@ -42,6 +48,9 @@ public class TestOfCalculate : MonoBehaviour
 
     public void EnterAnswer()
     {
+        if (inputFieldAnswer.text == null || inputFieldAnswer.text == "")
+            return;
+
         string answer = inputFieldAnswer.text;
         currentAnswer = Int32.Parse(answer);
         if(currentAnswer == correctAnswer)
