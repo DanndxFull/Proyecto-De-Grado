@@ -19,5 +19,8 @@ public class SaveScore : MonoBehaviour
     public void SaveScoreProfile()
     {
         //SaveManager.SavePlayerProfile(CurrentProfile.instanceProfile.playerProfile.name, score.score,CurrentProfile.instanceProfile.index);
+        Debug.Log(CurrentProfile.instanceProfile.name);
+        Debug.Log(score.score);
+        ProfilesManager.instance.UpdateProfile(CurrentProfile.instanceProfile.playerProfile.name, score.score);
     }
 }

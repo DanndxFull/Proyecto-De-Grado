@@ -23,11 +23,8 @@ public class CurrentProfile : MonoBehaviour
     }
 
 
-    public void SetCurrentProfile(int i)
+    public void SetCurrentProfile(PlayerProfile player)
     {
-        //playerProfile = new PlayerProfile(SaveManager.LoadPlayerProfile(i));
-        Debug.Log(playerProfile.name);
-        Debug.Log(playerProfile.score);
-        index = i;
+        this.playerProfile = player;
     }
 }

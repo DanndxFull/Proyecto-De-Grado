@@ -11,16 +11,18 @@ public class ProfilesManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        DontDestroyOnLoad(this);
+        LoadProfiles();
     }
 
     public void CreateProfiles()
     {
         List<PlayerProfile> profiles = new List<PlayerProfile>();
-        for(int i = 0; i < 5; i++)
-        {
-            PlayerProfile profile = new PlayerProfile("juan",0);
-            profiles.Add(profile);
-        }
+        //for(int i = 0; i < 5; i++)
+        //{
+        //    PlayerProfile profile = new PlayerProfile("juan",0);
+        //    profiles.Add(profile);
+        //}
         currentProfiles = new PlayerProfiles(profiles);
         SaveManager.SavePlayerProfile(currentProfiles);
     }
@@ -34,5 +36,15 @@ public class ProfilesManager : MonoBehaviour
     public void LoadProfiles()
     {
         currentProfiles = SaveManager.LoadPlayerProfile();
+        if (currentProfiles == null)
+        {
+            CreateProfiles();
+        }
+    }
+
+    public void UpdateProfile(string name, int score)
+    {
+        currentProfiles.UpdateProfile(name, score);
+        SaveManager.SavePlayerProfile(currentProfiles);
     }
 }
