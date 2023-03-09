@@ -25,7 +25,7 @@ public class CurrentProfile : MonoBehaviour
 
     public void SetCurrentProfile(int i)
     {
-        playerProfile = new PlayerProfile(SaveManager.LoadPlayerProfile(i));
+        //playerProfile = new PlayerProfile(SaveManager.LoadPlayerProfile(i));
         Debug.Log(playerProfile.name);
         Debug.Log(playerProfile.score);
         index = i;

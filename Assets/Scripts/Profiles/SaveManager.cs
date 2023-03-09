@@ -5,26 +5,27 @@ using System.Collections.Generic;
 
 public static class SaveManager
 {
-    public static void SavePlayerProfile(string name, int score, int saveIndex)
+    public static void SavePlayerProfile(PlayerProfiles profiles)
     {
-        PlayerProfile playerProfile = new PlayerProfile(name,score);
-        string dataPath = Application.persistentDataPath + "/playerProfiles"+ saveIndex +".save";
+        //PlayerProfile playerProfile = new PlayerProfile(name,score);
+        //PlayerProfiles profiles = new PlayerProfiles(playerProfiles);
+        string dataPath = Application.persistentDataPath + "/playerProfiles.save";
         FileStream fileStream;
         Debug.Log("Perfil añadido a archivo nuevo");
         fileStream = new FileStream(dataPath, FileMode.Create);
         BinaryFormatter binaryFormatter = new BinaryFormatter();
-        binaryFormatter.Serialize(fileStream, playerProfile);
+        binaryFormatter.Serialize(fileStream, profiles);
         fileStream.Close();
     }
 
-    public static PlayerProfile LoadPlayerProfile(int saveIndex)
+    public static PlayerProfiles LoadPlayerProfile()
     {
-        string dataPath = Application.persistentDataPath + "/playerProfiles" + saveIndex + ".save";
+        string dataPath = Application.persistentDataPath + "/playerProfiles.save";
         if (File.Exists(dataPath))
         {
             FileStream fileStream = new FileStream(dataPath, FileMode.Open);
             BinaryFormatter binaryFormatter = new BinaryFormatter();
-            PlayerProfile playerProfile = (PlayerProfile) binaryFormatter.Deserialize(fileStream);
+            PlayerProfiles playerProfile = (PlayerProfiles) binaryFormatter.Deserialize(fileStream);
             fileStream.Close();
             return playerProfile;
         }

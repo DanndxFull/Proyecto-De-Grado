@@ -30,8 +30,8 @@ public class ScoreManager : MonoBehaviour
 
     public void SaveScore()
     {
-        SaveManager.SavePlayerProfile(CurrentProfile.instanceProfile.playerProfile.name,
-                                      this.score, 
-                                      CurrentProfile.instanceProfile.index);
+        //SaveManager.SavePlayerProfile(CurrentProfile.instanceProfile.playerProfile.name,
+        //                              this.score, 
+        //                              CurrentProfile.instanceProfile.index);
     }
 }
