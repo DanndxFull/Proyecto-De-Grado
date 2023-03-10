@@ -213,4 +213,13 @@ public class PlayerController : MonoBehaviour
         forceToPush += force;
         ForceManager.instanceForce.UpdateForceUI(forceToPush);
     }
+
+    public void CanMoveFalse()
+    {
+        canMove = false;
+    }
+    public void CanMoveTrue()
+    {
+        canMove = true;
+    }
 }

@@ -12,14 +12,17 @@ public class VerificationObjectsZone : MonoBehaviour
     int currentAmount = 0;
 
     [SerializeField] UnityEvent winEvent;
+    [SerializeField] bool StartInteraction;
+    [SerializeField] int score;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(tag))
         {
             currentAmount++;
-            if(currentAmount == amountOfObjects)
+            if(currentAmount >= amountOfObjects)
             {
+                Debug.Log(other.tag);
                 Win();
             }
         }
@@ -27,8 +30,9 @@ public class VerificationObjectsZone : MonoBehaviour
 
     public void Win()
     {
-        ScoreManager.instanceScore.UpdateScore(4);
-        interactionController.FinishInteract();
+        ScoreManager.instanceScore.UpdateScore(score);
         winEvent.Invoke();
+        if(StartInteraction)
+            interactionController.FinishInteract();
     }
 }
