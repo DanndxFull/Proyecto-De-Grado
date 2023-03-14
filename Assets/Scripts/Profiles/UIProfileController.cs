@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+public enum TypeOfSaver{
+    scoreSaver,
+    nameSaver
+}
+
 public class UIProfileController : MonoBehaviour
 {
     [Header("Create")]
@@ -16,8 +21,12 @@ public class UIProfileController : MonoBehaviour
     [SerializeField] TMP_InputField nameProfileToDelete;
 
 
+    [SerializeField] TypeOfSaver type;
+
     public void CreateProfile()
     {
+        if (newNameProfile.text == null || newNameProfile.text == "")
+            return;
         PlayerProfile profile = new PlayerProfile(newNameProfile.text,0);
         ProfilesManager.instance.CreateProfile(profile);
         newNameProfile.text = "";
@@ -34,7 +43,15 @@ public class UIProfileController : MonoBehaviour
         {
             if(p.name == nameProfileToUpdate.text)
             {
-                p.name = newNameProfileToUpdate.text;
+                if (type.Equals(TypeOfSaver.nameSaver))
+                {
+                    p.name = newNameProfileToUpdate.text;
+                }
+
+                if (type.Equals(TypeOfSaver.scoreSaver))
+                {
+                    p.score = System.Int32.Parse(newNameProfileToUpdate.text);
+                }
             }
         }
         nameProfileToUpdate.text = "";
