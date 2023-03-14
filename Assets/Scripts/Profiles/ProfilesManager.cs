@@ -18,11 +18,6 @@ public class ProfilesManager : MonoBehaviour
     public void CreateProfiles()
     {
         List<PlayerProfile> profiles = new List<PlayerProfile>();
-        //for(int i = 0; i < 5; i++)
-        //{
-        //    PlayerProfile profile = new PlayerProfile("juan",0);
-        //    profiles.Add(profile);
-        //}
         currentProfiles = new PlayerProfiles(profiles);
         SaveManager.SavePlayerProfile(currentProfiles);
     }

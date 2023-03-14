@@ -7,8 +7,6 @@ public static class SaveManager
 {
     public static void SavePlayerProfile(PlayerProfiles profiles)
     {
-        //PlayerProfile playerProfile = new PlayerProfile(name,score);
-        //PlayerProfiles profiles = new PlayerProfiles(playerProfiles);
         string dataPath = Application.persistentDataPath + "/playerProfiles.save";
         FileStream fileStream;
         Debug.Log("Perfil añadido a archivo nuevo");
