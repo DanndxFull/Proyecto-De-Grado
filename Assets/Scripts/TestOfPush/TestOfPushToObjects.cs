@@ -1,50 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class TestOfPushToObjects : MonoBehaviour
 {
-    Rigidbody rb;
-
-    [SerializeField] float forceLeft, forceRight, timeToPush;
-    float currentTimeToPush1, currentTimeToPush2;
-    [SerializeField] Rigidbody push1, push2;
     public bool puzzleFinished;
-    // Start is called before the first frame update
-    void Awake()
-    {
-        currentTimeToPush1 = 0;
-        currentTimeToPush2 = 0;
-        rb = GetComponent<Rigidbody>();
-    }
+    [SerializeField] Transform car1, car2;
+
+    [SerializeField] Vector3 position1, position2;
 
     public void StartTest()
     {
-        StartCoroutine(StartMoving());
-    }
-
-    IEnumerator StartMoving()
-    {
-        while (!puzzleFinished)
-        {
-            currentTimeToPush1 += Time.deltaTime;
-            currentTimeToPush2 += Time.deltaTime;
-            DoPushLeft();
-            DoPushRight();        
-            yield return new WaitForSeconds(0.5f);
-        }
-    }
-
-    private void DoPushLeft()
-    {
-        push1.AddForce(Vector3.forward*(forceLeft/push1.mass), ForceMode.Impulse);
-        currentTimeToPush1 = 0;
-    }
-    private void DoPushRight()
-    {        
-        push2.AddForce(Vector3.forward * (forceRight / push2.mass), ForceMode.Impulse);
-        currentTimeToPush2 = 0;
+        car1.DOMove(new Vector3(car1.position.x, car1.position.y, car1.position.z+27),1);
+        car2.DOMove(new Vector3(car2.position.x, car2.position.y, car2.position.z + 27), 2).OnComplete(()=> puzzleFinished = true);
     }
 }
