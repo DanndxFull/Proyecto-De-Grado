@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class EscenarioManager : MonoBehaviour
 {
-    Escenarios currentEscenarios; 
+    public Escenarios currentEscenarios; 
 
     public static EscenarioManager instance;
 
     private void Awake()
     {
         instance = this;
+        Debug.Log("Escenario Manager Creado");
         DontDestroyOnLoad(this);
         LoadStages();
     }
@@ -55,6 +56,12 @@ public class EscenarioManager : MonoBehaviour
     public void UpdateStage(string name, string newName, int[] escenarios)
     {
         currentEscenarios.UpdateNameStage(name,newName, escenarios);
+        SaveManagerEscenario.SavePlayerProfile(currentEscenarios);
+    }
+
+    public void DeleteStage(string name)
+    {
+        currentEscenarios.DeleteProfile(name);
         SaveManagerEscenario.SavePlayerProfile(currentEscenarios);
     }
 }

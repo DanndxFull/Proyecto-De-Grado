@@ -15,9 +15,14 @@ public class UIControllerEscenarios : MonoBehaviour
 
     [Header("Consultar Escenario")]
     [SerializeField] TMP_InputField nameFiedlConsultar;
+    [SerializeField] TextMeshProUGUI nombresEscenarios;
 
     [Header("Modificar Escenario")]
     [SerializeField] TMP_InputField nameFieldModificar;
+
+    [Header("Eliminar Escenario")]
+    [SerializeField] TMP_InputField nameFieldEliminar;
+
 
     string[] nombres =  { "Carritos Compra", "Carritos y Vascula", "Prueba Fuerza", "Carrito de Juguete" };
 
@@ -26,6 +31,11 @@ public class UIControllerEscenarios : MonoBehaviour
     private void Awake()
     {
         currentEscenario = new Escenario();
+    }
+
+    private void OnEnable()
+    {
+        ConsultarEscenarios();
     }
 
     public void ChangeLevel()
@@ -75,18 +85,26 @@ public class UIControllerEscenarios : MonoBehaviour
 
     public void CreateEscenario()
     {
-        Debug.Log("Empezando a crear");
         if (nameFiedlCrear.text == null || nameFiedlCrear.text == "" || VerificateNotEmpty())
         {
             return;
         }
 
         currentEscenario.nombre = nameFiedlCrear.text;
-        Debug.Log("Empezando a crear1");
         nameCurrentStage.text = currentEscenario.nombre;
-        Debug.Log("Empezando a crear2");
         EscenarioManager.instance.CreateStage(currentEscenario);
-        Debug.Log("Escenario Creado Con Exito");
+        nameFiedlCrear.text = "";
+    }
+
+    public void ConsultarEscenarios()
+    {
+        EscenarioManager.instance.LoadStages();
+        Escenarios escenarios = EscenarioManager.instance.currentEscenarios;
+        nombresEscenarios.text = "";
+        foreach (Escenario e in escenarios.escenarios)
+        {
+            nombresEscenarios.text += e.nombre + "\n";
+        }
     }
 
     public void ConsultarEscenario()
@@ -110,6 +128,7 @@ public class UIControllerEscenarios : MonoBehaviour
             index++;
         }
         Debug.Log("Escenario Consultado Con Exito");
+        nameFiedlConsultar.text = "";
     }
 
     public void ModificarEscenario()
@@ -127,5 +146,17 @@ public class UIControllerEscenarios : MonoBehaviour
         {
             EscenarioManager.instance.UpdateStage(currentEscenario.nombre, nameFieldModificar.text, currentEscenario.escenarios);
         }
+        nameFieldModificar.text = "";
+    }
+
+    public void EliminarEscenario()
+    {
+        if(nameFieldEliminar.text == null || nameFieldEliminar.text == "")
+        {
+            return;
+        }
+
+        EscenarioManager.instance.DeleteStage(nameFieldEliminar.text);
+        nameFieldEliminar.text = "";
     }
 }

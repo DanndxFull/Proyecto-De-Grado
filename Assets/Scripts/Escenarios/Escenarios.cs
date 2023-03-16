@@ -5,6 +5,12 @@ using System.Collections.Generic;
 public class Escenarios
 {
     public List<Escenario> escenarios;
+
+    public Escenarios()
+    {
+        this.escenarios = new List<Escenario>();
+    }
+
     public Escenarios(List<Escenario> profiles)
     {
         this.escenarios = profiles;
