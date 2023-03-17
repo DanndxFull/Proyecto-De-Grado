@@ -5,12 +5,12 @@ using TMPro;
 
 public class ProfileSelector : MonoBehaviour
 {
-    [SerializeField] TMP_InputField nameProfile;
+    [SerializeField] TMP_InputField nameProfile, nameStage;
     [SerializeField] SimpleSceneCharger sceneCharger;
 
     public void SetCurrentProfile()
     {
-        if (nameProfile.text == null || nameProfile.text == "")
+        if (nameProfile.text == null || nameProfile.text == "" || nameStage.text == null || nameStage.text == "")
             return;
         string name = nameProfile.text;
         Debug.Log(name);
@@ -21,6 +21,7 @@ public class ProfileSelector : MonoBehaviour
             return;
         }
         CurrentProfile.instanceProfile.SetCurrentProfile(ProfilesManager.instance.currentProfiles.GetProfile(name));
+        CurrentEscenario.instanceEscenario.SetCurrentEscenario(EscenarioManager.instance.LoadStage(nameStage.text));
         sceneCharger.ChargeScene("Prototype1");
     }
 }

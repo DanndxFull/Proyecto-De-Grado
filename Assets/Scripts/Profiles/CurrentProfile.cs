@@ -7,7 +7,6 @@ public class CurrentProfile : MonoBehaviour
     public static CurrentProfile instanceProfile;
 
     public PlayerProfile playerProfile;
-    public int index;
 
     private void Awake()
     {
