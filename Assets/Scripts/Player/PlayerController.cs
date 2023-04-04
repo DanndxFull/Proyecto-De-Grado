@@ -100,6 +100,10 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Newton");
                 hitColliders[0].GetComponent<TestOfCalculate>().StartDialogue();
             }
+            else if (hitColliders[0].CompareTag("InteractableObject"))
+            {
+                hitColliders[0].GetComponent<InteractObject>().Interact();
+            }
         }
         else if (isHolding)
         {

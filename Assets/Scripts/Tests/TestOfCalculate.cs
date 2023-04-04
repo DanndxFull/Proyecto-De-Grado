@@ -11,6 +11,7 @@ public class TestOfCalculate : MonoBehaviour
     [SerializeField] GameObject inputFieldAnswerObject,buttonEnterAnswer, buttonNextDialogue, dialogueControlls;
     [SerializeField] TextMeshProUGUI textBox;
     [SerializeField] PlayerController player;
+    [SerializeField] Animator animPlayer;
 
     [SerializeField] float correctAnswer;
     float currentAnswer;
@@ -19,6 +20,9 @@ public class TestOfCalculate : MonoBehaviour
     [SerializeField] int index;
     [SerializeField] int indexOfAnswer;
     public bool active;
+
+    [Header("Cam")]
+    [SerializeField] private GameObject cam;
 
     public void StartDialogue()
     {
@@ -29,8 +33,10 @@ public class TestOfCalculate : MonoBehaviour
         Debug.Log("Started");
         textBox.text = texts[index];
         player.canMove = false;
+        animPlayer.SetBool("IDLEOTHERS", true);
         dialogueControlls.SetActive(true);
         active = true;
+        cam.SetActive(true);
         NewtonManager.newtonManager.SetCurrent(this);
     }
 
@@ -55,6 +61,8 @@ public class TestOfCalculate : MonoBehaviour
         currentAnswer = Int32.Parse(answer);
         if(currentAnswer == correctAnswer)
         {
+            cam.SetActive(false);
+            animPlayer.SetBool("IDLEOTHERS", false);
             player.canMove = true;
             winEvent.Invoke();
         }

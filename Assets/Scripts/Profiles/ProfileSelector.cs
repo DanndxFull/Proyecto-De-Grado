@@ -17,11 +17,15 @@ public class ProfileSelector : MonoBehaviour
         if (ProfilesManager.instance.currentProfiles.GetProfile(name) == null)
         {
             Debug.Log(ProfilesManager.instance.currentProfiles.GetProfile(name));
-            nameProfile.text = "";
             return;
         }
+        if (EscenarioManager.instance.LoadStage(nameStage.text) == null)
+            return;
+
         CurrentProfile.instanceProfile.SetCurrentProfile(ProfilesManager.instance.currentProfiles.GetProfile(name));
         CurrentEscenario.instanceEscenario.SetCurrentEscenario(EscenarioManager.instance.LoadStage(nameStage.text));
+        nameProfile.text = "";
+        nameStage.text = "";
         sceneCharger.ChargeScene("Prototype1");
     }
 }

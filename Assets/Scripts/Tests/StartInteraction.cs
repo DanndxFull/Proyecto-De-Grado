@@ -14,7 +14,6 @@ public class StartInteraction : MonoBehaviour
     public bool startedPuzle;
     public bool ToggleRigidBodys = true, ToggleObjects = true;
 
-    public Transform position, parent;
 
     private void Start()
     {
@@ -28,10 +27,6 @@ public class StartInteraction : MonoBehaviour
         startedPuzle = true;
         camera.SetActive(true);
         camera2.SetActive(false);
-        //player.GetComponent<Rigidbody>().isKinematic = true;
-        player.transform.parent = parent.transform; 
-        player.transform.position = position.position;
-        player.transform.rotation = position.rotation;
         player.canMove = false;
         if(ToggleRigidBodys)
             RigidBodyesKinematics(false);
@@ -61,7 +56,6 @@ public class StartInteraction : MonoBehaviour
         camera2.SetActive(true);
         player.GetComponent<Rigidbody>().isKinematic = false;
         player.canMove = true;
-        player.transform.SetParent(null);
         if(ToggleRigidBodys)
             RigidBodyesKinematics(true);
         if(ToggleObjects)

@@ -9,7 +9,9 @@ public class AnimationsController : MonoBehaviour
     float speed, timeBeenStay;
     [SerializeField] float timeToDance;
     bool isIDLEING, isPushing;
-    [SerializeField] PlayerController player;
+    [SerializeField] private PlayerController player;
+
+    private Animator otherAnim;
 
     private void Start()
     {
@@ -64,4 +66,26 @@ public class AnimationsController : MonoBehaviour
         isPushing = state;
         anim.SetBool("Pushing", state);
     }
+
+    public void Punch()
+    {
+        otherAnim.SetTrigger("Move");
+    }
+
+    public void StartPunch(Animator anim)
+    {
+        otherAnim = anim;
+        this.anim.SetTrigger("Punch");
+    }
+
+    public void CanotMove()
+    {
+        player.canMove = false;
+    }
+
+    public void CanMove()
+    {
+        player.canMove = true;
+    }
+
 }

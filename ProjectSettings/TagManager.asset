@@ -9,6 +9,8 @@ TagManager:
   - Grabable
   - Newton
   - PushableObject
+  - InteractableObject
+  - Door
   layers:
   - Default
   - TransparentFX
