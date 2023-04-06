@@ -24,7 +24,8 @@ public class UIControllerEscenarios : MonoBehaviour
     [SerializeField] TMP_InputField nameFieldEliminar;
 
 
-    string[] nombres =  { "Carritos Compra", "Carritos y Vascula", "Prueba Fuerza", "Carrito de Juguete" };
+    string[] nombres =  { "Carritos Compra", "Carritos y Vascula", "Prueba Fuerza", "Carrito de Juguete", 
+        "Caida", "Pendulo", "Pendulo Estatico", "Plano Inclinado", "Resorte", "Resorte 2", };
 
     Escenario currentEscenario;
 
@@ -40,7 +41,7 @@ public class UIControllerEscenarios : MonoBehaviour
 
     public void ChangeLevel()
     {
-        if(nivelNombre.value == 4)
+        if(nivelNombre.value == 10)
         {
             currentEscenario.escenarios[nivelNumero.value] = -1;
             names[nivelNumero.value].text = "No Seleccionado";

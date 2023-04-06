@@ -58,7 +58,7 @@ public class TestOfCalculate : MonoBehaviour
             return;
 
         string answer = inputFieldAnswer.text;
-        currentAnswer = Int32.Parse(answer);
+        currentAnswer = float.Parse(answer);
         if(currentAnswer == correctAnswer)
         {
             cam.SetActive(false);

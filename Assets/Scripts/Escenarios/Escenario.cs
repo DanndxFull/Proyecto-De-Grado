@@ -2,12 +2,12 @@
 public class Escenario
 {
     public string nombre;
-    public int[] escenarios = new int[4];
+    public int[] escenarios = new int[9];
 
     public Escenario()
     {
         this.nombre = "";
-        this.escenarios = new int[4] { -1,-1,-1,-1};
+        this.escenarios = new int[9] { -1,-1,-1,-1,-1,-1,-1,-1,-1};
     }
     public Escenario(string nombre, int[] nuevosEscenarios)
     {

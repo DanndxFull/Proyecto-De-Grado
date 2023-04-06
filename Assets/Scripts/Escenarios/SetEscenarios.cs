@@ -15,6 +15,7 @@ public class SetEscenarios : MonoBehaviour
         foreach (int i in escenario.escenarios)
         {
             puzzles[i].transform.position = positionsPuzzles[index].position;
+            puzzles[i].SetActive(true);
             index++;
         }
     }
