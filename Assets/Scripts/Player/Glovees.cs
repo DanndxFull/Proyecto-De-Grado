@@ -9,8 +9,6 @@ public class Glovees : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerController>().strong = true;
-            other.GetComponent<PlayerController>().UpdateForce(10);
-            ShortMessage.instanceMessage.ShowMessage("You Feel Stronger", 2);
             this.gameObject.SetActive(false);
         }
     }

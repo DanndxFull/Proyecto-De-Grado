@@ -16,7 +16,8 @@ public class Vehicle : MonoBehaviour
         if (other.CompareTag("Grabable"))
         {
             other.transform.parent = transform;
-            currentlyWeight++;
+            Weight weight = other.GetComponent<Weight>();
+            currentlyWeight += weight.weight;
             CheckWeigth();
         }
     }
@@ -26,16 +27,17 @@ public class Vehicle : MonoBehaviour
         if (other.CompareTag("Grabable"))
         {
             other.transform.parent = null;
-            currentlyWeight--;
+            Weight weight = other.GetComponent<Weight>();
+            currentlyWeight -= weight.weight;        
         }        
     }
 
 
     public void CheckWeigth()
     {
-        if (currentlyWeight >= exactWeight)
+        if (currentlyWeight == exactWeight)
         {
-            transform.DOMove(endPosition, timeToMove).OnComplete(()=>WinEvent.Invoke());
+            transform.DOMove(new Vector3(transform.position.x + -40, transform.position.y, transform.position.z), timeToMove).OnComplete(()=>WinEvent.Invoke());
 
             Debug.Log("Me muevo");
         }

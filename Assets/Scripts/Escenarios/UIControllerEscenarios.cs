@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class UIControllerEscenarios : MonoBehaviour
 {
@@ -36,7 +37,18 @@ public class UIControllerEscenarios : MonoBehaviour
 
     private void OnEnable()
     {
+        ResetEscenarios();
         ConsultarEscenarios();
+    }
+
+    private void ResetEscenarios()
+    {
+        foreach (TextMeshProUGUI t in names)
+        {
+            t.SetText("No Seleccionado");
+        }
+        nameCurrentStage.SetText("Escenario No Seleccionado");
+        currentEscenario = new Escenario();
     }
 
     public void ChangeLevel()
@@ -105,7 +117,7 @@ public class UIControllerEscenarios : MonoBehaviour
         foreach (Escenario e in escenarios.escenarios)
         {
             nombresEscenarios.text += e.nombre + "\n";
-        }
+        }        
     }
 
     public void ConsultarEscenario()
@@ -130,6 +142,7 @@ public class UIControllerEscenarios : MonoBehaviour
         }
         Debug.Log("Escenario Consultado Con Exito");
         nameFiedlConsultar.text = "";
+        CurrentEscenario.instanceEscenario.escenario = currentEscenario;
     }
 
     public void ModificarEscenario()

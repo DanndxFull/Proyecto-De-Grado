@@ -212,12 +212,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void UpdateForce(float force)
-    {
-        forceToPush += force;
-        ForceManager.instanceForce.UpdateForceUI(forceToPush);
-    }
-
     public void CanMoveFalse()
     {
         canMove = false;

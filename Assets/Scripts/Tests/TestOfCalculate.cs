@@ -12,6 +12,7 @@ public class TestOfCalculate : MonoBehaviour
     [SerializeField] TextMeshProUGUI textBox;
     [SerializeField] PlayerController player;
     [SerializeField] Animator animPlayer;
+    [SerializeField] Animator animPantalla;
 
     [SerializeField] float correctAnswer;
     float currentAnswer;
@@ -34,6 +35,7 @@ public class TestOfCalculate : MonoBehaviour
         textBox.text = texts[index];
         player.canMove = false;
         animPlayer.SetBool("IDLEOTHERS", true);
+        animPantalla.SetTrigger("Desplegar");
         dialogueControlls.SetActive(true);
         active = true;
         cam.SetActive(true);

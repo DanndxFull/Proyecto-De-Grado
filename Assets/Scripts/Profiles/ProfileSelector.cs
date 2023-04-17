@@ -19,11 +19,25 @@ public class ProfileSelector : MonoBehaviour
             Debug.Log(ProfilesManager.instance.currentProfiles.GetProfile(name));
             return;
         }
-        if (EscenarioManager.instance.LoadStage(nameStage.text) == null)
+        if (EscenarioManager.instance.LoadStage(nameStage.text) == null )
             return;
 
         CurrentProfile.instanceProfile.SetCurrentProfile(ProfilesManager.instance.currentProfiles.GetProfile(name));
         CurrentEscenario.instanceEscenario.SetCurrentEscenario(EscenarioManager.instance.LoadStage(nameStage.text));
+
+        
+        foreach (int e in CurrentEscenario.instanceEscenario.escenario.escenarios)
+        {
+            if (e == -1)
+            {
+                Debug.Log("MENU");
+                sceneCharger.ChargeScene("Prototype1");
+
+            }
+
+        }
+
+
         nameProfile.text = "";
         nameStage.text = "";
         sceneCharger.ChargeScene("Prototype1");

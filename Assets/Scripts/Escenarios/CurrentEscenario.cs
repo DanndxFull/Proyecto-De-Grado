@@ -22,6 +22,25 @@ public class CurrentEscenario : MonoBehaviour
 
     public void SetCurrentEscenario(Escenario escenario)
     {
-        this.escenario = escenario;
+        if (VerificateNotEmpty(escenario))
+        {
+            this.escenario = null;
+        }
+        else
+        {
+            this.escenario = escenario;
+        }
     }
+
+    public bool VerificateNotEmpty(Escenario escenario)
+    {
+        Debug.Log("Hay espacios Vacios");
+        foreach (int i in escenario.escenarios)
+        {
+            if (i == -1)
+                return true;
+        }
+        return false;
+    }
+
 }

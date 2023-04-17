@@ -5,7 +5,6 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI scoreText;
     public static ScoreManager instanceScore;
     public int score = 0;
 
@@ -25,13 +24,5 @@ public class ScoreManager : MonoBehaviour
     public void UpdateScore(int score)
     {
         this.score += score;
-        scoreText.SetText("Score: "+ this.score);
-    }
-
-    public void SaveScore()
-    {
-        //SaveManager.SavePlayerProfile(CurrentProfile.instanceProfile.playerProfile.name,
-        //                              this.score, 
-        //                              CurrentProfile.instanceProfile.index);
     }
 }
