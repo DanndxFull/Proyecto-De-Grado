@@ -25,4 +25,9 @@ public class ScoreManager : MonoBehaviour
     {
         this.score += score;
     }
+
+    public void RestartScore()
+    {
+        this.score = 0;
+    }
 }

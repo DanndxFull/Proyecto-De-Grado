@@ -7,6 +7,12 @@ public class SaveScore : MonoBehaviour
 {
     [SerializeField] ScoreManager score;
 
+    private void Awake()
+    {
+        score = ScoreManager.instanceScore;
+        score.score = 0;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
