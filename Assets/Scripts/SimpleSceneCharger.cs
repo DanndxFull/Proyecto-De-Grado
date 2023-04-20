@@ -11,4 +11,9 @@ public class SimpleSceneCharger : MonoBehaviour
         SceneManager.LoadScene(name);
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
 }
