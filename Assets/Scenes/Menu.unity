@@ -2269,6 +2269,12 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Distancia Esfera
       m_Image: {fileID: 0}
+    - m_Text: Plataforma Resorte
+      m_Image: {fileID: 0}
+    - m_Text: Fuerza Horizontal
+      m_Image: {fileID: 0}
+    - m_Text: Resorte Humano
+      m_Image: {fileID: 0}
     - m_Text: No Seleccionado
       m_Image: {fileID: 0}
   m_OnValueChanged:

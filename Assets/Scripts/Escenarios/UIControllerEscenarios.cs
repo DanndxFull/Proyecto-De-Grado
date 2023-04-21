@@ -27,7 +27,8 @@ public class UIControllerEscenarios : MonoBehaviour
 
     string[] nombres =  { "Carritos Compra", "Carro y Vascula", "Prueba Fuerza", "Carrito de Juguete", 
         "Caida", "Pendulo", "Pendulo Estatico", "Plano Inclinado", "Resorte", "Resorte 2", "Polea", 
-        "Carro Inclinado","Distancia", "Distancia Esfera"};
+        "Carro Inclinado","Distancia", "Distancia Esfera","Plataforma Resorte", "Fuerza Horizontal",
+        "Resorte Humano"};
 
     Escenario currentEscenario;
 
@@ -54,7 +55,7 @@ public class UIControllerEscenarios : MonoBehaviour
 
     public void ChangeLevel()
     {
-        if(nivelNombre.value == 14)
+        if(nivelNombre.value == 17)
         {
             currentEscenario.escenarios[nivelNumero.value] = -1;
             names[nivelNumero.value].text = "No Seleccionado";

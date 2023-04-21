@@ -220,4 +220,13 @@ public class PlayerController : MonoBehaviour
     {
         canMove = true;
     }
+
+    public void StrongTrue()
+    {
+        strong = false;
+    }
+    public void StrongFalse()
+    {
+        strong = true;
+    }
 }
