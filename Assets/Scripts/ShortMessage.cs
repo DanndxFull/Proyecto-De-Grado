@@ -6,7 +6,7 @@ using TMPro;
 public class ShortMessage : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textField;
-    [SerializeField] GameObject textFieldObject;
+    [SerializeField] GameObject textFieldObject, background;
     public float timeToShow;
 
     public static ShortMessage instanceMessage;
@@ -23,6 +23,7 @@ public class ShortMessage : MonoBehaviour
         textField.text = message;
         timeToShow = i;
         textFieldObject.SetActive(true);
+        background.SetActive(true);
         StartCoroutine(DisappearMessage());
     }
 
@@ -30,5 +31,6 @@ public class ShortMessage : MonoBehaviour
     {
         yield return new WaitForSeconds(timeToShow);
         textFieldObject.SetActive(false);
+        background.SetActive(false);
     }
 }

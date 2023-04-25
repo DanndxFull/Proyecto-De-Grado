@@ -3,9 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
+    [SerializeField] private GameObject menu;
+    [SerializeField] private CinemachineFreeLook cinema;
+
+    
 
     [Header("Movement Variables")]
     //Input Fileds
@@ -163,6 +168,21 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.y < 0f)
             rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime * gravityMultiplier;
         ray = new Ray(new Vector3(eyes.position.x, eyes.position.y, eyes.position.z), transform.forward);
+    }
+
+    private void LateUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ChangeStateGame(menu.activeInHierarchy);
+        }
+    }
+
+    public void ChangeStateGame(bool state)
+    {
+        menu.SetActive(!state);
+        cinema.enabled = state;        
+        Time.timeScale = state ? 1 : 0;
     }
 
     private void LookAt()

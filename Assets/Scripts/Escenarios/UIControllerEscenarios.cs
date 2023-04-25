@@ -6,6 +6,8 @@ using System;
 
 public class UIControllerEscenarios : MonoBehaviour
 {
+    [SerializeField] GameObject UIESCENARIOS;
+    
     [Header("Selector Niveles")]
     [SerializeField] TMP_Dropdown nivelNumero, nivelNombre;
     [SerializeField] List<TextMeshProUGUI> names;
@@ -28,7 +30,7 @@ public class UIControllerEscenarios : MonoBehaviour
     string[] nombres =  { "Carritos Compra", "Carro y Vascula", "Prueba Fuerza", "Carrito de Juguete", 
         "Caida", "Pendulo", "Pendulo Estatico", "Plano Inclinado", "Resorte", "Resorte 2", "Polea", 
         "Carro Inclinado","Distancia", "Distancia Esfera","Plataforma Resorte", "Fuerza Horizontal",
-        "Resorte Humano"};
+        "Resorte Humano","Sube y Baja"};
 
     Escenario currentEscenario;
 
@@ -55,7 +57,7 @@ public class UIControllerEscenarios : MonoBehaviour
 
     public void ChangeLevel()
     {
-        if(nivelNombre.value == 17)
+        if(nivelNombre.value == 18)
         {
             currentEscenario.escenarios[nivelNumero.value] = -1;
             names[nivelNumero.value].text = "No Seleccionado";
@@ -102,13 +104,19 @@ public class UIControllerEscenarios : MonoBehaviour
     {
         if (nameFiedlCrear.text == null || nameFiedlCrear.text == "" || VerificateNotEmpty())
         {
+            ShortMessage.instanceMessage.ShowMessage("No se pudo crear el escenario porque no hay nombre del escenario o hay espacios vacios, " +
+                "todo escenario debe tener nueve niveles", 2);
             return;
         }
+
 
         currentEscenario.nombre = nameFiedlCrear.text;
         nameCurrentStage.text = currentEscenario.nombre;
         EscenarioManager.instance.CreateStage(currentEscenario);
+        UIESCENARIOS.SetActive(false);
+        UIESCENARIOS.SetActive(true);
         nameFiedlCrear.text = "";
+        ShortMessage.instanceMessage.ShowMessage("Se creo el escenario con exito", 2);
     }
 
     public void ConsultarEscenarios()
@@ -126,6 +134,7 @@ public class UIControllerEscenarios : MonoBehaviour
     {
         if (nameFiedlConsultar.text == null || nameFiedlConsultar.text == "")
         {
+            ShortMessage.instanceMessage.ShowMessage("No se pudo consultar el escenario", 2);
             return;
         }
 
@@ -151,6 +160,7 @@ public class UIControllerEscenarios : MonoBehaviour
     {
         if (VerificateNotEmpty())
         {
+            ShortMessage.instanceMessage.ShowMessage("No se pudo modificar el escenario", 2);
             return;
         }
 
@@ -163,16 +173,19 @@ public class UIControllerEscenarios : MonoBehaviour
             EscenarioManager.instance.UpdateStage(currentEscenario.nombre, nameFieldModificar.text, currentEscenario.escenarios);
         }
         nameFieldModificar.text = "";
+        ShortMessage.instanceMessage.ShowMessage("Se modifico el escenario con exito", 2);
     }
 
     public void EliminarEscenario()
     {
         if(nameFieldEliminar.text == null || nameFieldEliminar.text == "")
         {
+            ShortMessage.instanceMessage.ShowMessage("No se pudo eliminar el escenario", 2);
             return;
         }
 
         EscenarioManager.instance.DeleteStage(nameFieldEliminar.text);
         nameFieldEliminar.text = "";
+        ShortMessage.instanceMessage.ShowMessage("Se elimino el escenario con exito", 2);
     }
 }
