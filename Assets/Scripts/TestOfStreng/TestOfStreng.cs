@@ -32,6 +32,7 @@ public class TestOfStreng : MonoBehaviour
     {
         if (canPush)
         {
+            rb.isKinematic = false;
             float input = Input.GetAxis("Vertical");
             if (input < 0)
                 input = 0;
